@@ -1,0 +1,8 @@
+[user]
+	email = 57598729+inikolaou@users.noreply.github.com
+	name = Ioannis Nikolaou
+	signingkey = ~/.ssh/github-sign.pub
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
