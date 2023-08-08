@@ -6,3 +6,7 @@
 	gpgsign = true
 [gpg]
 	format = ssh
+[help]
+	autocorrect = 20
+[fetch]
+	prune = true
