@@ -1,0 +1,16 @@
+[/]
+default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(1,11,23)'
+background-transparency-percent=0
+bold-color='rgb(238,238,238)'
+bold-color-same-as-fg=false
+font='MesloLGS NF 12'
+foreground-color='rgb(235,221,244)'
+palette=['rgb(11,59,97)', 'rgb(255,58,58)', 'rgb(82,255,207)', 'rgb(255,243,131)', 'rgb(19,118,248)', 'rgb(199,146,234)', 'rgb(255,93,212)', 'rgb(21,252,162)', 'rgb(98,104,108)', 'rgb(255,84,176)', 'rgb(115,255,216)', 'rgb(252,244,173)', 'rgb(55,141,254)', 'rgb(174,129,255)', 'rgb(255,105,215)', 'rgb(95,251,190)']
+use-system-font=false
+use-theme-colors=false
+use-theme-transparency=true
+use-transparent-background=false
