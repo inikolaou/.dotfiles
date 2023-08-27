@@ -116,3 +116,5 @@ export NVM_DIR="$HOME/.nvm"
 
 alias vim="nvim"
 alias vi="vim"
+
+export PATH=$HOME/Downloads/nvim-linux64/bin:$PATH
