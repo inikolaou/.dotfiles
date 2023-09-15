@@ -118,3 +118,4 @@ alias vim="nvim"
 alias vi="vim"
 
 export PATH=$HOME/Downloads/nvim-linux64/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
