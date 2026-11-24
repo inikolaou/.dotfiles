@@ -33,6 +33,7 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
+    client                  # $CLIENT from ~/clients/<client>/.envrc (prompt_client below)
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
@@ -1767,6 +1768,20 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
+  }
+
+  # Which client this shell works for (set by direnv in ~/clients/<client>), in its CLIENT_COLOUR. Colours match the
+  # Windows Terminal tab colours set by ~/clients/bin/new-client. A closed client shows red.
+  function prompt_client() {
+    [[ -n $CLIENT ]] || return
+    local claude_md=$HOME/clients/$CLIENT/CLAUDE.md
+    if [[ -r $claude_md && "$(<$claude_md)" == *'**Closed'* ]]; then
+      p10k segment -b 160 -f 15 -t "$CLIENT (closed)"
+      return
+    fi
+    # Each client's .envrc sets CLIENT_COLOUR (a 256-colour number), so no client names live here
+    local bg=${CLIENT_COLOUR:-136}
+    p10k segment -b $bg -f 15 -t "$CLIENT"
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

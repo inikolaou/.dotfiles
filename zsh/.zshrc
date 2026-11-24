@@ -120,3 +120,37 @@ alias vi="vim"
 
 export PATH=$HOME/Downloads/nvim-linux64/bin:$PATH
 export PATH=$PATH:$HOME/go/bin
+
+# PATH (from .bashrc / .profile)
+[[ -d $HOME/bin ]] && export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.opencode/bin:$PATH"
+
+# WSL
+export BROWSER=wslview
+
+# Workflow CLI
+alias wf="$HOME/workflow/tools/wf"
+[[ -f ~/.secrets ]] && source ~/.secrets   # holds WF_JIRA_TOKEN, see below
+
+# direnv (note: "zsh", not "bash")
+eval "$(direnv hook zsh)"
+
+# awsp: switch AWS profile
+awsp() {
+  local p
+  if aws configure list-profiles | grep -qx -- "$1"; then
+    p="$1"
+  elif command -v fzf >/dev/null; then
+    p=$(aws configure list-profiles | fzf --exact --height=40% --reverse --select-1 --exit-0 \
+          --query="$1" --prompt="AWS profile> " --header="Current: ${AWS_PROFILE:-<none>}")
+  else
+    echo "Current: ${AWS_PROFILE:-<none>}"
+    select p in $(aws configure list-profiles | grep -- "$1"); do [ -n "$p" ] && break; done
+  fi
+  [ -z "$p" ] && { echo "No profile matches '$1'"; return 1; }
+  export AWS_PROFILE="$p"
+  aws sts get-caller-identity --query Arn --output text 2>/dev/null \
+    || echo "Profile set to $p, but no valid session. Run: aws sso login --profile $p"
+}
+_awsp() { compadd -- ${(f)"$(aws configure list-profiles 2>/dev/null)"} }
+compdef _awsp awsp
