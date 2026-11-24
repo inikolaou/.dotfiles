@@ -1,6 +1,9 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim", -- configure formatters & linters
+	"nvimtools/none-ls.nvim", -- configure formatters & linters (maintained null-ls fork)
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"nvimtools/none-ls-extras.nvim", -- sources removed from none-ls builtins (eslint_d)
+	},
 	config = function()
 		-- import null-ls plugin
 		local null_ls = require("null-ls")
@@ -27,7 +30,7 @@ return {
 				formatting.gofumpt,
 				formatting.goimports_reviser,
 				formatting.golines,
-				diagnostics.eslint_d,
+				require("none-ls.diagnostics.eslint_d"),
 			},
 			-- configure format on save
 			on_attach = function(current_client, bufnr)
